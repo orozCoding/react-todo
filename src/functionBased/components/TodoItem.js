@@ -1,44 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import styles from "./TodoItem.module.css"
+import styles from './TodoItem.module.css';
 
 const TodoItem = (props) => {
-  const [editing, setEditing ] = useState(false);
+  const [editing, setEditing] = useState(false);
 
   const handleEditing = () => {
-    setEditing(true)
-  }
+    setEditing(true);
+  };
 
   const handleUpdatedDone = (e) => {
-    console.log('change');
-    if (e.key === "Enter") {
-      setEditing(false)
+    if (e.key === 'Enter') {
+      setEditing(false);
     }
-  }
+  };
 
-  useEffect(() => {
-    return () => {
-      console.log("Cleaning ups...")
-    }
-  },[])
+  useEffect(() => () => {
+  }, []);
 
   const completedStyle = {
-    fontStyle: "italic",
-    color: "#595959",
+    fontStyle: 'italic',
+    color: '#595959',
     opacity: 0.4,
-    textDecoration: "line-through",
-  }
-  
-  const { completed, id, title } = props.todo
-  
-  let viewMode = {}
-  let editMode = {}
-  
+    textDecoration: 'line-through',
+  };
+
+  const { completed, id, title } = props.todo;
+
+  const viewMode = {};
+  const editMode = {};
+
   if (editing) {
-    viewMode.display = "none"
+    viewMode.display = 'none';
   } else {
-    editMode.display = "none"
+    editMode.display = 'none';
   }
-  
+
   return (
     <li className={styles.item}>
       <div onDoubleClick={handleEditing} style={viewMode}>
@@ -66,11 +62,8 @@ const TodoItem = (props) => {
         onKeyDown={handleUpdatedDone}
       />
     </li>
-  )
-
-}
-
-
+  );
+};
 
 /*
 class TodoItem extends React.Component {
