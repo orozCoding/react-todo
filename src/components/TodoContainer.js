@@ -4,6 +4,7 @@ import Header from './Header';
 import InputTodo from './InputTodo';
 import { v4 as uuidv4 } from "uuid";
 
+
 class TodoContainer extends React.Component {
   constructor(props) {
     super(props);
@@ -63,16 +64,30 @@ class TodoContainer extends React.Component {
     })
   };
 
+  setUpdate = (updatedTitle, id) => {
+    this.setState({
+      todos: this.state.todos.map(todo => {
+        if (todo.id === id) {
+          todo.title = updatedTitle
+        }
+        return todo
+      }),
+    })
+  }
+  
   render() {
     return (
-      <div>
-        <Header />
-        <InputTodo addTodoProps={this.addTodoItem} />
-        <TodosList
-          todos={this.state.todos}
-          handleChangeProps={this.handleChange}
-          deleteTodoProps={this.delTodo}
-        />
+      <div className="container">
+        <div className="inner">
+          <Header />
+          <InputTodo addTodoProps={this.addTodoItem} />
+          <TodosList
+            todos={this.state.todos}
+            handleChangeProps={this.handleChange}
+            deleteTodoProps={this.delTodo}
+            setUpdate={this.setUpdate}
+          />
+        </div>
       </div>
     );
   }
