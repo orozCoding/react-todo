@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './TodoItem.module.css';
 
 class TodoItem extends React.Component {
@@ -29,16 +30,21 @@ class TodoItem extends React.Component {
       textDecoration: 'line-through',
     };
 
-    const { completed, id, title } = this.props.todo;
+    const { todo } = this.props;
+    const { completed, id, title } = todo;
 
     const viewMode = {};
     const editMode = {};
 
-    if (this.state.editing) {
+    const { editing } = this.state;
+
+    if (editing) {
       viewMode.display = 'none';
     } else {
       editMode.display = 'none';
     }
+
+    const { handleChangeProps, deleteTodoProps, setUpdate } = this.props;
 
     return (
       <li className={styles.item}>
@@ -47,9 +53,9 @@ class TodoItem extends React.Component {
             type="checkbox"
             className={styles.checkbox}
             checked={completed}
-            onChange={() => this.props.handleChangeProps(id)}
+            onChange={() => handleChangeProps(id)}
           />
-          <button onClick={() => this.props.deleteTodoProps(id)}>
+          <button type="button" onClick={() => deleteTodoProps(id)}>
             Delete
           </button>
           <span style={completed ? completedStyle : null}>
@@ -62,7 +68,7 @@ class TodoItem extends React.Component {
           style={editMode}
           value={title}
           onChange={(e) => {
-            this.props.setUpdate(e.target.value, id);
+            setUpdate(e.target.value, id);
           }}
           onKeyDown={this.handleUpdatedDone}
         />
@@ -70,5 +76,16 @@ class TodoItem extends React.Component {
     );
   }
 }
+
+TodoItem.propTypes = {
+  setUpdate: PropTypes.func.isRequired,
+  deleteTodoProps: PropTypes.func.isRequired,
+  handleChangeProps: PropTypes.func.isRequired,
+  todo: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    completed: PropTypes.bool.isRequired,
+    title: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default TodoItem;

@@ -1,3 +1,4 @@
+import propTypes from 'prop-types';
 import React, { useState } from 'react';
 
 const InputTodo = (props) => {
@@ -13,9 +14,10 @@ const InputTodo = (props) => {
   };
 
   const handleSubmit = (e) => {
+    const { addTodoProps } = props;
     e.preventDefault();
     if (inputText.title.trim()) {
-      props.addTodoProps(inputText.title);
+      addTodoProps(inputText.title);
       setInputText({
         title: '',
       });
@@ -34,9 +36,13 @@ const InputTodo = (props) => {
         name="title"
         onChange={onChange}
       />
-      <button className="input-submit">Submit</button>
+      <button type="submit" className="input-submit">Submit</button>
     </form>
   );
+};
+
+InputTodo.propTypes = {
+  addTodoProps: propTypes.func.isRequired,
 };
 
 export default InputTodo;
