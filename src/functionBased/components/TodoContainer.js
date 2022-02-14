@@ -84,7 +84,7 @@ const TodoContainer = () => {
           />
         </div>
       </div>}/>
-      <Route path="/about" element={<About />}/>
+      <Route path="/about/*" component={About} element={<About />}/>
       <Route path="*" element={<NotMatch />}/>
     </Routes>
     </>

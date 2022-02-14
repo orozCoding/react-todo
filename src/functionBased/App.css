@@ -71,8 +71,7 @@ body {
   border: none;
 }
 
-.active-link,
-.active {
+.active-link {
   font-weight: bold;
   color: orangered;
 }
