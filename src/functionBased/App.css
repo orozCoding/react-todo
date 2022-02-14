@@ -4,6 +4,13 @@
   padding: 0;
 }
 
+a,
+a::after,
+a:visited,
+a:active {
+  text-decoration: inherit;
+}
+
 body {
   font-family: "Segoe UI", Arial, sans-serif;
   line-height: 1.4;
@@ -62,4 +69,10 @@ body {
   height: 45px;
   outline: none;
   border: none;
+}
+
+.active-link,
+.active {
+  font-weight: bold;
+  color: orangered;
 }
