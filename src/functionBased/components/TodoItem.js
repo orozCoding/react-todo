@@ -49,7 +49,7 @@ const TodoItem = (props) => {
           onChange={() => props.handleChangeProps(id)}
         />
         <button onClick={() => props.deleteTodoProps(id)}>
-          Delete
+          X
         </button>
         <span style={completed ? completedStyle : null}>
           {title}
